@@ -4,9 +4,9 @@ Schematics for the Cylindrical Rotation Sensor (CRS) developed by M.P.Ross and t
 
 Analysis Code: [CRSSpec_RSI.m](https://github.com/mpross/CRS-Analysis/tree/main/CRSSpec_RSI.m)
 
-Raw Data: [LongRun.lvm](https://github.com/mpross/CRS-Analysis/tree/main/LongRun.lvm)
+Raw Data: [CRS_data.dat](https://github.com/mpross/CRS-Analysis/tree/main/CRS_data.dat)
 
-![](https://github.com/mpross/CRS-Schematics/blob/main/CRS_Spectrum.png)
+![](https://github.com/mpross/CRS-Analysis/blob/main/CRS_Spectrum.png)
 
 ## License
 CRS-Analysis Non-commercial License
