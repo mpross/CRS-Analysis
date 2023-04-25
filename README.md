@@ -1,6 +1,6 @@
 ## CRS-Analysis
 
-Schematics for the Cylindrical Rotation Sensor (CRS) developed by M.P.Ross and the Eot-Wash group for the LIGO gravitational wave observatories.
+Analysis code and data from the Cylindrical Rotation Sensor (CRS) developed by M.P.Ross and the Eot-Wash group for the LIGO gravitational wave observatories. Schematics of the CRS can be found at [CRS-Schematics.git](https://github.com/mpross/CRS-Schematics)
 
 Analysis Code: [CRSSpec_RSI.m](https://github.com/mpross/CRS-Analysis/tree/main/CRSSpec_RSI.m)
 
