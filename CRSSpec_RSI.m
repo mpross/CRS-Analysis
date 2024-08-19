@@ -4,9 +4,8 @@ lamb = 1064e-9; % Wavelength
 fg=0; % Gravitational frequency
 % f0 = 17.05e-3; % Resonant frequency
 f0 = 17.8e-3;
-% f0 = 19.4e-3;
 g=9.81; % Gravitational acceleration
-Q=30.9; % Quality Factor
+Q=294; % Quality Factor
 R=15.24e-2; % Lever-arm 
 kb=1.380e-23; 
 T=293;    
@@ -94,12 +93,14 @@ f = F2;
 Tf=1./abs(f.^2./(f.^2-i*(f0^2/Q)-f0^2));
 
 thermal = Tf.*sqrt(4*kb*T*f0^2./(I*2*pi*f.*Q.*((f.^2-f0^2).^2+f0^4/Q^2)));
-
+damping = Tf.*sqrt(4*kb*T*f0./(I*2*pi*Q.*((f.^2-f0^2).^2+f0^2*f.^2/Q^2)));
+dampingAng = sqrt(4*kb*T*f0./(I*2*pi*Q.*((f.^2-f0^2).^2+f0^2*f.^2/Q^2)));
+thermalAng = sqrt(4*kb*T*f0^2./(I*2*pi*f.*Q.*((f.^2-f0^2).^2+f0^4/Q^2)));
 %% Plots 
 
 % ASD of HoQI Distances
 figure(1)
-l=loglog(F,AP, F, AP2, F2,AM2);
+l=loglog(F,AP, F, AP2, F2,AM2, F2, dampingAng*R, F2, thermalAng*R);
 xlabel('Frequency (Hz)','Interpreter', 'latex')
 ylabel('ASD (m/$\sqrt{Hz}$)','Interpreter', 'latex')
 set(l,'LineWidth',1.5);
@@ -123,15 +124,15 @@ grid on
 
 % ASD of angle readout
 figure(3)
-l=loglog( FA,AAF, F2,noise, F2, noiseModel, F2, thermal);
+l=loglog( FA,AAF, F2,noise, F2, damping, F2, sqrt(noise.^2+damping.^2), F2, noiseModel);
 xlabel('Frequency (Hz)','Interpreter', 'latex')
 ylabel('ASD (rad/$\sqrt{Hz}$)','Interpreter', 'latex')
 set(l,'LineWidth',1.5);
 set(gca,'FontSize',16);
 set(l,'MarkerSize',16);
-ylim([6e-13 1e-6])
-xlim([5e-3 1e1])
-legend('Inertial Angle','Readout Noise', 'Goal', 'Thermal Noise', 'GS13 Noise', 'T240 Noise','T360 Noise',  'Interpreter', 'latex')
+ylim([6e-13 1e-7])
+xlim([1e-2 1e1])
+legend('Inertial Angle','Readout Noise', 'Damping Noise', 'Instrument Noise','Goal','GS13 Noise', 'T240 Noise','T360 Noise',  'Interpreter', 'latex')
 grid on
 
 % Time series of raw angle
@@ -158,3 +159,8 @@ xlim([5e-3 1e1])
 legend('Inertial Angle','Readout Noise with sub','Readout Noise','Z','X','Y',  'Interpreter', 'latex')
 grid on
 
+% fig=figure(3)
+% set(fig,'Units','Inches');
+% pos = get(fig,'Position');
+% set(fig,'PaperPositionMode','Auto','PaperUnits','Inches','PaperSize',[pos(3), pos(4)])
+% print(fig,'CRS_Noise_RSI.pdf','-dpdf','-r1200')
